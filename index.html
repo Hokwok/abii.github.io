@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Forever Love</title>
+  <link rel="stylesheet" href="static/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="static/css/TimeCircles.css"/> -->
+  <link rel="stylesheet" type="text/css" href="static/css/lovefxf.css">
+  <link rel="icon" href="static/images/love.png">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="content">
+      <div class="headtitle">
+        <img src="static/images/ghh.jpg" alt="ghh">
+        <img src="static/images/cat.gif" alt="cat">
+        <img src="static/images/fxf.jpg" alt="fxf">
+      </div>
+      <div class="destitle">浩浩 & 晓芙 在一起的日子</div>
+      <div class="DateCountdown" id="span_dt_dt"></div>
+      <!-- <div class="loveword1">
+        "你是我的今天以及所有的明天。"
+      </div> -->
+      <div class="loveword2">
+        "You are my today and all of my tomorrows."
+      </div>
+    </div>
+  </div>
+
+  <!-- 两只LKM一样的猪 -->
+  <div class="lkmIsPig">
+    <img src="static/images/pig1.gif" alt="pig1" class="pig1">
+    <img src="static/images/pig2.gif" alt="pig2" class="pig2">
+  </div>
+
+  <audio id="bgmusic" controls="controls" autoplay="autoplay" preload hidden>
+    <source src="static/music/bg.mp3" />
+  </audio>
+
+  <script type="text/javascript" src="static/js/jquery.min.js"></script>
+  <!-- <script type="text/javascript" src="static/js/TimeCircles.js"></script> -->
+
+  <!-- 落叶效果 -->
+  <script src="static/js/su.js"></script>
+
+  <script>
+    // $("#DateCountdown").TimeCircles();
+
+    // 微信上自动播放
+    function audioAutoPlay(id){
+      var audio1 = document.getElementById(id);
+      audio1.play();
+      document.addEventListener("WeixinJSBridgeReady", function () {
+        audio1.play();
+      }, false);
+    }
+    audioAutoPlay('bgmusic');
+
+    // 点击页面自动播放
+    function toggleSound() {
+      var music = document.getElementById("bgmusic");//获取ID
+        console.log(music);
+        console.log(music.paused);
+      if (music.paused) { //判读是否播放
+        music.paused=false;
+        music.play(); //没有就播放
+      }
+    }
+    setInterval("toggleSound()",1);
+
+    // 花瓣飘落效果
+    jQuery(document).ready(function ($) {
+      $('body').wpSuperSnow({
+        flakes: [
+          './static/images/001.png', 
+          './static/images/002.png', 
+          './static/images/003.png',
+          './static/images/004.png'
+        ],
+        totalFlakes: '100',
+        zIndex: '999999999',
+        maxSize: '30',
+        minSize: '10',
+        maxDuration: '20',
+        useFlakeTrans: true
+      });
+    });
+
+    function show_date_time(){
+      window.setTimeout("show_date_time()", 1000);
+      BirthDay=new Date("05/27/2024 21:59:00");
+      today=new Date();
+      timeold=(today.getTime()-BirthDay.getTime());
+      sectimeold=timeold/1000
+      secondsold=Math.floor(sectimeold);
+      msPerDay=24*60*60*1000
+      e_daysold=timeold/msPerDay
+      daysold=Math.floor(e_daysold);
+      e_hrsold=(e_daysold-daysold)*24;
+      hrsold=Math.floor(e_hrsold);
+      e_minsold=(e_hrsold-hrsold)*60;
+      minsold=Math.floor((e_hrsold-hrsold)*60);
+      seconds=Math.floor((e_minsold-minsold)*60);
+      span_dt_dt.innerHTML='<font style=color:rgb(253,99,125) >'+daysold+'</font> 天 <font style=color:rgb(253,99,125)>'+hrsold+'</font> 时 <font style=color:rgb(253,99,125)>'+minsold+'</font> 分 <font style=color:rgb(253,99,125)>'+seconds+'</font> 秒';
+    }
+    show_date_time();
+
+    window.onload = function() {
+      console.log(123);
+    }
+  </script>
+</body>
+</html>
